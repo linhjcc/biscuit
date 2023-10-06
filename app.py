@@ -1,9 +1,13 @@
 from functions import picture
 from flask import Flask
 
-app = Flask(__name__)
+# https://stackoverflow.com/a/30873279
+app = Flask(__name__, instance_relative_config=True)
+# default value during development
+app.secret_key = "dev"
+# overridden if this file exists in the instance folder
+app.config.from_pyfile("config.py", silent=True)
 
-app.secret_key = "any random string"
 urls = [picture]
 for u in urls:
     app.register_blueprint(u)
