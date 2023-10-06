@@ -1,16 +1,24 @@
 import io
-from baseopensdk import BaseClient
-from baseopensdk.api.base.v1 import *
-from baseopensdk.api.drive.v1 import *
-from flask import Blueprint, request, render_template
-import string
+from flask import Blueprint, render_template, request
 import matplotlib.pyplot as plt
 from PIL import Image
+
+from baseopensdk import BaseClient
+from baseopensdk.api.base.v1 import (
+    AppTableRecord,
+    ListAppTableRecordRequest,
+    UpdateAppTableRecordRequest,
+    UpdateAppTableRecordResponse,
+)
+from baseopensdk.api.drive.v1 import (
+    UploadAllMediaRequest,
+    UploadAllMediaRequestBody,
+)
 
 picture = Blueprint('insert_picture', __name__)
 
 
-def dataToLineChar(x: string, y: string, data_x: list, data_y: list):
+def dataToLineChar(x: str, y: str, data_x: list, data_y: list):
     """
     根据提供的两列数据绘制折线图，并保存于本地
     :param x: x轴名称
