@@ -1,4 +1,4 @@
-from insertPicture import picture
+from functions import picture
 from flask import Flask
 
 app = Flask(__name__)
