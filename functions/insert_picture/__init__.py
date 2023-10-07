@@ -1,3 +1,5 @@
+from typing import List
+
 import io
 from flask import Blueprint, render_template, request
 import matplotlib
@@ -19,7 +21,7 @@ from baseopensdk.api.drive.v1 import (
 picture = Blueprint("insert_picture", __name__)
 
 
-def dataToLinePlot(x: str, y: str, data_x: list, data_y: list) -> str:
+def dataToLinePlot(x: str, y: str, data_x: List[float], data_y: List[float]) -> str:
     assert len(data_x) == len(data_y)
     path = "./static/line_plot.png"
     plt.plot(data_x, data_y, marker="o")
@@ -31,10 +33,10 @@ def dataToLinePlot(x: str, y: str, data_x: list, data_y: list) -> str:
 
 
 def upload(APP_TOKEN: str, TABLE_ID: str, client: BaseClient, path: str, record_id: str) -> None:
-    imgByteArr = io.BytesIO()
+    _imgByteArr = io.BytesIO()
     img = Image.open(path, mode="r")
-    img.save(imgByteArr, format="PNG")
-    imgByteArr = imgByteArr.getvalue()
+    img.save(_imgByteArr, format="PNG")
+    imgByteArr = _imgByteArr.getvalue()
 
     request = (
         UploadAllMediaRequest.builder()
@@ -82,8 +84,8 @@ def insert_picture(
     records = getattr(list_record_response.data, "items", [])
 
     # 3. 保存数据
-    data_x = []
-    data_y = []
+    data_x: List[float] = []
+    data_y: List[float] = []
     for record in records:
         x = record.fields.get(field1, None)
         y = record.fields.get(field2, None)
