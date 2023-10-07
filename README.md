@@ -24,8 +24,8 @@ we develop backend scripts to realize various table manipulation utilities.
 
 ## Get Started with A Line Plot Example
 
-With this example extension, we will be able to select two fields from a table for X and Y axes,
-respectively, draw a line plot using `matplotlib`, and finally upload the result image to the table
+With the line plot extension, we will be able to select two fields from a table for X and Y axes,
+draw a line plot using `matplotlib`, and finally upload the result image to the table
 as an attachment.
 
 ### Resolve Dependencies
@@ -52,6 +52,5 @@ trigger a draw, and finally witness an image being uploaded.
 For more information on attaining information like `personalBaseToken`, please refer to
 https://bytedance.feishu.cn/docx/QpMLdHkoporxOHxya5mcxhxln6f.
 
-> **info**
->
+> [!WARNING]
 > An "Attachment" field must exist, which is hard-coded currently.
