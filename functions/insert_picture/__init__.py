@@ -113,18 +113,14 @@ def insert_picture(APP_TOKEN, PERSONAL_BASE_TOKEN, TABLE_ID, field1, field2):
     return "success"
 
 
-@picture.route("/insert_picture", methods=["POST", "GET"])
-def insert_picture_page():
-    test = ""
-    if request.method == "POST":
-        APP_TOKEN = request.form["appToken"]
-        PERSONAL_BASE_TOKEN = request.form["personalBaseToken"]
-        TABLE_ID = request.form["tableSelect"]
+@picture.route("/insert_picture", methods=["POST"])
+def insert_picture_page() -> str:
+    APP_TOKEN = request.form["appToken"]
+    PERSONAL_BASE_TOKEN = request.form["personalBaseToken"]
+    TABLE_ID = request.form["tableSelect"]
 
-        field1 = request.form["colSelect1"]
-        field2 = request.form["colSelect2"]
-        print(field2)
+    field1 = request.form["colSelect1"]
+    field2 = request.form["colSelect2"]
 
-        test = insert_picture(APP_TOKEN, PERSONAL_BASE_TOKEN, TABLE_ID, field1, field2)
-    print(test, "aaa")
-    return render_template("insert_picture.html", data=test)
+    resp = insert_picture(APP_TOKEN, PERSONAL_BASE_TOKEN, TABLE_ID, field1, field2)
+    return render_template("insert_picture.html", data=resp)
