@@ -1,5 +1,7 @@
 import io
 from flask import Blueprint, render_template, request
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from PIL import Image
 
@@ -98,14 +100,17 @@ def insert_picture(
     return "success"
 
 
-@picture.route("/insert_picture", methods=["POST"])
+@picture.route("/insert_picture", methods=["GET", "POST"])
 def insert_picture_page() -> str:
-    APP_TOKEN = request.form["appToken"]
-    PERSONAL_BASE_TOKEN = request.form["personalBaseToken"]
-    TABLE_ID = request.form["tableSelect"]
+    if request.method == "POST":
+        APP_TOKEN = request.form["appToken"]
+        PERSONAL_BASE_TOKEN = request.form["personalBaseToken"]
+        TABLE_ID = request.form["tableSelect"]
 
-    field1 = request.form["colSelect1"]
-    field2 = request.form["colSelect2"]
+        field1 = request.form["colSelect1"]
+        field2 = request.form["colSelect2"]
 
-    resp = insert_picture(APP_TOKEN, PERSONAL_BASE_TOKEN, TABLE_ID, field1, field2)
+        resp = insert_picture(APP_TOKEN, PERSONAL_BASE_TOKEN, TABLE_ID, field1, field2)
+    else:
+        resp = ""
     return render_template("insert_picture.html", data=resp)
