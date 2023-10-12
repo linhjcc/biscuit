@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Base Script</title>
+  <script type="module" crossorigin src="/static/js/index.cbdf6b03.js"></script>
+  <link rel="stylesheet" href="/static/js/index.19c5fb09.css">
+</head>
+
+<body>
+  <main class="main p-3 pt-4">
+    {{ data }}
+    <h3 class="mb-3">Create <code class="code">line plot</code> and save to attachment</h3>
+    <form method="post" action="/insert_picture">
+      <div class='mb-3'>
+        <label for='appToken' class='form-label'>APP_TOKEN</label>
+        <input id='appToken' class='form-control' name="appToken">
+        <label for='personalBaseToken' class='form-label'>PERSONAL_BASE_TOKEN</label>
+        <input id='personalBaseToken' class='form-control' name="personalBaseToken">
+      </div>
+      <div class="mb-3">
+        <label for="tableSelect" class="form-label">Select Table</label>
+        <select id='tableSelect' class="form-select" name="tableSelect"></select>
+
+        <label for="colSelect1" class="form-label">Select Field1</label>
+        <select id='colSelect1' class="form-select" name="colSelect1"></select>
+
+        <label for="colSelect2" class="form-label">Select Field2</label>
+        <select id='colSelect2' class="form-select" name="colSelect2"></select>
+      </div>
+      <input class='btn btn-outline-primary' type="submit" value="addPicture" name="submit">
+    </form>
+  </main>
+</body>
+
+</html>
