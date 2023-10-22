@@ -77,13 +77,10 @@ def insert_picture(
 ) -> str:
     # 1. 构建client
     client = BaseClient.builder().app_token(APP_TOKEN).personal_base_token(PERSONAL_BASE_TOKEN).build()
+
     # 2. 遍历记录
     list_record_request = ListAppTableRecordRequest.builder().page_size(100).table_id(TABLE_ID).build()
     list_record_response = client.base.v1.app_table_record.list(list_record_request)
-    
-    if(list_record_response.msg != "success"):
-        return "invalid app_token or personal base token"
-    
     records = getattr(list_record_response.data, "items", [])
 
     # 3. 保存数据
@@ -118,7 +115,4 @@ def insert_picture_page() -> str:
         resp = insert_picture(APP_TOKEN, PERSONAL_BASE_TOKEN, TABLE_ID, field1, field2)
     else:
         resp = ""
-    if resp == "success" or resp == "":
-        return render_template("insert_picture.html", data=resp)
-    else:
-        return render_template("invalid_token.html", data=resp)
+    return render_template("insert_picture.html", data=resp)
